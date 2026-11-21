@@ -1,0 +1,209 @@
+{
+  "model_name": "SME Hybrid Model",
+  "model_version": "1.0.0",
+  "training_file": "C:\\Users\\nucle\\PycharmProjects\\SME_PRE_PREDICTION\\dataset\\sme_train.csv",
+  "testing_file": "C:\\Users\\nucle\\PycharmProjects\\SME_PRE_PREDICTION\\dataset\\sme_test.csv",
+  "target_column": "default",
+  "default_class": 1,
+  "class_mapping": {
+    "0": "Non-default",
+    "1": "Default / High Risk"
+  },
+  "feature_names": [
+    "state",
+    "sector",
+    "legal_status",
+    "business_age_years",
+    "employee_count",
+    "annual_revenue",
+    "previous_year_revenue",
+    "annual_profit",
+    "monthly_expenses",
+    "total_liabilities",
+    "business_credit_score",
+    "prior_loan_count",
+    "late_payment_history",
+    "missed_payments_12m",
+    "loan_purpose",
+    "loan_amount",
+    "loan_tenure_months",
+    "cash_flow_stability",
+    "revenue_growth_rate",
+    "debt_to_revenue_ratio",
+    "loan_to_revenue_ratio",
+    "profit_margin",
+    "dscr"
+  ],
+  "numeric_features": [
+    "business_age_years",
+    "employee_count",
+    "annual_revenue",
+    "previous_year_revenue",
+    "annual_profit",
+    "monthly_expenses",
+    "total_liabilities",
+    "business_credit_score",
+    "prior_loan_count",
+    "missed_payments_12m",
+    "loan_amount",
+    "loan_tenure_months",
+    "revenue_growth_rate",
+    "debt_to_revenue_ratio",
+    "loan_to_revenue_ratio",
+    "profit_margin",
+    "dscr"
+  ],
+  "categorical_features": [
+    "state",
+    "sector",
+    "legal_status",
+    "late_payment_history",
+    "loan_purpose",
+    "cash_flow_stability"
+  ],
+  "train_shape": [
+    40000,
+    23
+  ],
+  "test_shape": [
+    10000,
+    23
+  ],
+  "evaluation": {
+    "LogisticRegression": {
+      "metrics": {
+        "accuracy": 0.6655,
+        "precision": 0.3225547835382149,
+        "recall": 0.5984134853743183,
+        "f1": 0.4191699947907623,
+        "roc_auc": 0.6959499521510478
+      },
+      "report": {
+        "0": {
+          "precision": 0.8705656759348035,
+          "recall": 0.6824502066892146,
+          "f1-score": 0.7651148093532758,
+          "support": 7983.0
+        },
+        "1": {
+          "precision": 0.3225547835382149,
+          "recall": 0.5984134853743183,
+          "f1-score": 0.4191699947907623,
+          "support": 2017.0
+        },
+        "accuracy": 0.6655,
+        "macro avg": {
+          "precision": 0.5965602297365091,
+          "recall": 0.6404318460317664,
+          "f1-score": 0.5921424020720191,
+          "support": 10000.0
+        },
+        "weighted avg": {
+          "precision": 0.7600318789384116,
+          "recall": 0.6655,
+          "f1-score": 0.6953377402560168,
+          "support": 10000.0
+        }
+      }
+    },
+    "RandomForest": {
+      "metrics": {
+        "accuracy": 0.7454,
+        "precision": 0.37894736842105264,
+        "recall": 0.4105106593951413,
+        "f1": 0.3940980485483103,
+        "roc_auc": 0.687673750944853
+      },
+      "report": {
+        "0": {
+          "precision": 0.8478566858605247,
+          "recall": 0.8300137792809721,
+          "f1-score": 0.8388403595391821,
+          "support": 7983.0
+        },
+        "1": {
+          "precision": 0.37894736842105264,
+          "recall": 0.4105106593951413,
+          "f1-score": 0.3940980485483103,
+          "support": 2017.0
+        },
+        "accuracy": 0.7454,
+        "macro avg": {
+          "precision": 0.6134020271407886,
+          "recall": 0.6202622193380567,
+          "f1-score": 0.6164692040437463,
+          "support": 10000.0
+        },
+        "weighted avg": {
+          "precision": 0.7532776765329832,
+          "recall": 0.7454,
+          "f1-score": 0.7491358354123233,
+          "support": 10000.0
+        }
+      }
+    },
+    "SMEHybrid": {
+      "metrics": {
+        "accuracy": 0.7094,
+        "precision": 0.35018537243006403,
+        "recall": 0.5151214675260287,
+        "f1": 0.4169341894060995,
+        "roc_auc": 0.6956678703275696
+      },
+      "report": {
+        "0": {
+          "precision": 0.8609412768377648,
+          "recall": 0.7584867844168859,
+          "f1-score": 0.806473095364944,
+          "support": 7983.0
+        },
+        "1": {
+          "precision": 0.35018537243006403,
+          "recall": 0.5151214675260287,
+          "f1-score": 0.4169341894060995,
+          "support": 2017.0
+        },
+        "accuracy": 0.7094,
+        "macro avg": {
+          "precision": 0.6055633246339144,
+          "recall": 0.6368041259714573,
+          "f1-score": 0.6117036423855218,
+          "support": 10000.0
+        },
+        "weighted avg": {
+          "precision": 0.7579218109187316,
+          "recall": 0.7094,
+          "f1-score": 0.7279030980330451,
+          "support": 10000.0
+        }
+      }
+    }
+  },
+  "cross_validation_auc": {
+    "LogisticRegression": [
+      0.7082365945783976,
+      0.7079680962576516,
+      0.7094055653805897,
+      0.713899402775045,
+      0.7083356133363293
+    ],
+    "RandomForest": [
+      0.6959071292422,
+      0.6971722335607903,
+      0.6982879797077793,
+      0.7074466062106892,
+      0.6968849531832917
+    ],
+    "SMEHybrid": [
+      0.7066449975738265,
+      0.7063249417580512,
+      0.7082107467892708,
+      0.7142817641285479,
+      0.7069164812587634
+    ]
+  },
+  "preprocessing": {
+    "numeric": "median+StandardScaler",
+    "categorical": "most_frequent+OneHotEncoder"
+  }
+}
