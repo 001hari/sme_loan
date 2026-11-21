@@ -1,0 +1,14 @@
+# Credentials and local configuration
+.env
+
+# Python environments and generated cache
+venv/
+.venv/
+.python313/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+logs/
+
+# IDE-local state
+.idea/

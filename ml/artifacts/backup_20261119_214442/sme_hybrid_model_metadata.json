@@ -1,0 +1,218 @@
+{
+  "model_name": "SME Hybrid Model",
+  "model_version": "1.0.0",
+  "dataset_source": "Synthetic, generated from live PostgreSQL business and loan application schema.",
+  "dataset_file": "dataset/synthetic_sme_loan_data.csv",
+  "training_file": "dataset/sme_train.csv",
+  "testing_file": "dataset/sme_test.csv",
+  "target_column": "default",
+  "class_mapping": {
+    "0": "Non-default",
+    "1": "Default / High Risk"
+  },
+  "default_class": 1,
+  "decision_threshold": 0.5,
+  "feature_names": [
+    "state",
+    "sector",
+    "legal_status",
+    "business_age_years",
+    "employee_count",
+    "annual_revenue",
+    "previous_year_revenue",
+    "annual_profit",
+    "monthly_expenses",
+    "total_liabilities",
+    "business_credit_score",
+    "prior_loan_count",
+    "late_payment_history",
+    "missed_payments_12m",
+    "loan_purpose",
+    "loan_amount",
+    "loan_tenure_months",
+    "cash_flow_stability",
+    "revenue_growth_rate",
+    "debt_to_revenue_ratio",
+    "loan_to_revenue_ratio",
+    "profit_margin",
+    "dscr"
+  ],
+  "numerical_features": [
+    "business_age_years",
+    "employee_count",
+    "annual_revenue",
+    "previous_year_revenue",
+    "annual_profit",
+    "monthly_expenses",
+    "total_liabilities",
+    "business_credit_score",
+    "prior_loan_count",
+    "late_payment_history",
+    "missed_payments_12m",
+    "loan_amount",
+    "loan_tenure_months",
+    "revenue_growth_rate",
+    "debt_to_revenue_ratio",
+    "loan_to_revenue_ratio",
+    "profit_margin",
+    "dscr"
+  ],
+  "categorical_features": [
+    "state",
+    "sector",
+    "legal_status",
+    "loan_purpose",
+    "cash_flow_stability"
+  ],
+  "preprocessing": {
+    "numerical": "median imputation; StandardScaler in Logistic Regression only",
+    "categorical": "most-frequent imputation; OneHotEncoder(handle_unknown='ignore')",
+    "fit_scope": "training split only; preprocessing is embedded in each estimator pipeline"
+  },
+  "generation_seed": 42,
+  "training_rows": 40000,
+  "testing_rows": 10000,
+  "training_class_counts": {
+    "0": 31931,
+    "1": 8069
+  },
+  "testing_class_counts": {
+    "0": 7983,
+    "1": 2017
+  },
+  "synthetic_default_label_generation": "Bernoulli sampling from a logistic probability based on credit score, debt/revenue, loan/revenue, DSCR, weak profit margin, late/missed payments, cash-flow stability, and declining/weak revenue growth. The intercept is calibrated for 20% expected prevalence; sampled outcomes are not forced to an exact class count.",
+  "model_parameters": {
+    "logistic_regression": "C=1.0, lbfgs, max_iter=2000, class_weight=balanced",
+    "random_forest": "180 trees, max_depth=14, min_samples_leaf=4, max_features=sqrt, class_weight=balanced_subsample",
+    "voting": "sklearn VotingClassifier, voting=soft, equal weights [1, 1]"
+  },
+  "test_metrics": {
+    "Logistic Regression": {
+      "accuracy": 0.6652,
+      "precision_default": 0.3223912463303977,
+      "recall_default": 0.5989092711948438,
+      "f1_default": 0.41915336571825124,
+      "roc_auc": 0.6959536784631148
+    },
+    "Random Forest": {
+      "accuracy": 0.744,
+      "precision_default": 0.37540156034878386,
+      "recall_default": 0.40555280118988596,
+      "f1_default": 0.38989513822688276,
+      "roc_auc": 0.6888645560710909
+    },
+    "SME Hybrid Model": {
+      "accuracy": 0.7121,
+      "precision_default": 0.35310156782549423,
+      "recall_default": 0.5136341100644521,
+      "f1_default": 0.41850131286608766,
+      "roc_auc": 0.6961301814446924
+    }
+  },
+  "training_only_cross_validation": {
+    "Logistic Regression": {
+      "accuracy": {
+        "mean": 0.6750500845916978,
+        "std": 0.0030654439985492747
+      },
+      "precision": {
+        "mean": 0.33392986093667076,
+        "std": 0.0028922018518706496
+      },
+      "recall": {
+        "mean": 0.614079021282263,
+        "std": 0.004076115109986737
+      },
+      "f1": {
+        "mean": 0.43260544376221305,
+        "std": 0.0029525083595821843
+      },
+      "roc_auc": {
+        "mean": 0.7091357585262376,
+        "std": 0.004220227233517304
+      }
+    },
+    "Random Forest": {
+      "accuracy": {
+        "mean": 0.7588251259453828,
+        "std": 0.004664474617818011
+      },
+      "precision": {
+        "mean": 0.4008655463705677,
+        "std": 0.008659257758442656
+      },
+      "recall": {
+        "mean": 0.39459540290586786,
+        "std": 0.008846076049923294
+      },
+      "f1": {
+        "mean": 0.3976240740727901,
+        "std": 0.005311413634902479
+      },
+      "roc_auc": {
+        "mean": 0.6967522402392271,
+        "std": 0.005193343860700269
+      }
+    },
+    "SME Hybrid Model": {
+      "accuracy": {
+        "mean": 0.7221250990251807,
+        "std": 0.0044838885862794504
+      },
+      "precision": {
+        "mean": 0.36604877787920714,
+        "std": 0.005234002517553253
+      },
+      "recall": {
+        "mean": 0.5154290069736588,
+        "std": 0.0028948887057747893
+      },
+      "f1": {
+        "mean": 0.4280548052701731,
+        "std": 0.0026670339370367785
+      },
+      "roc_auc": {
+        "mean": 0.7076034711969578,
+        "std": 0.004624513911310114
+      }
+    }
+  },
+  "confusion_matrices_label_order": [
+    "Non-default",
+    "Default / High Risk"
+  ],
+  "confusion_matrices": {
+    "Logistic Regression": [
+      [
+        5444,
+        2539
+      ],
+      [
+        809,
+        1208
+      ]
+    ],
+    "Random Forest": [
+      [
+        6622,
+        1361
+      ],
+      [
+        1199,
+        818
+      ]
+    ],
+    "SME Hybrid Model": [
+      [
+        6085,
+        1898
+      ],
+      [
+        981,
+        1036
+      ]
+    ]
+  },
+  "evaluation_caveat": "All metrics measure agreement with this generator's simulated labels, not observed repayment outcomes or real-world bank performance.",
+  "created_date": "2026-11-18"
+}

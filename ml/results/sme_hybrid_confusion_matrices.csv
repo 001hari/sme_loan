@@ -1,0 +1,4 @@
+model,true_non_default_pred_non_default,true_non_default_pred_default,true_default_pred_non_default,true_default_pred_default
+Logistic Regression,5444,2539,809,1208
+Random Forest,6622,1361,1199,818
+SME Hybrid Model,6085,1898,981,1036
